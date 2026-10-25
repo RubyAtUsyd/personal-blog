@@ -24,7 +24,7 @@ http-server 的间接 whatwg-encoding 依赖有弃用提示；仅用于本地/CI
 
 ## 运行边界
 
-GitHub 用户名/远程仓库尚未提供；CI 文件已经实现不等于 GitHub 上已经运行。没有推送、PR、远程 required check 或生产部署。采用单人手工审核流程，未来有独立维护者后再要求正式 approval。
+用户提供 `RubyAtUsyd/personal-blog` 远程仓库。P0 分支已推送并通过草稿 PR #1 审核；GitHub 上 `checks`、`security`、`quality-gate` 已成功。main 分支启用必须经 PR、required `quality-gate`、管理员适用和禁止强推/删除。单人模式 required approval 为 0；Ruby 仍需人工审核 diff 才合并。隔离测试 PR #2 证明失败检查导致 `quality-gate` 失败和合并阻止，测试 PR 已关闭。没有生产部署。
 
 AWS、MongoDB、图片服务和检索问答仍为后续阶段，不属于当前可演示能力。
 
