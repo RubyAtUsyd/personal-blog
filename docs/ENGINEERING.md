@@ -75,17 +75,21 @@ Codex 自审与 AI review 是辅助证据，不替代人类批准。若同一 Gi
 
 ```markdown
 ## Problem and result
+
 说明具体问题、用户可见行为、关联任务。
 
 ## Verification
+
 - 实际运行的命令与结果
 - UI 改动：截图/录屏与关键交互说明
 - 尚未验证的真实集成及原因
 
 ## Risks and recovery
+
 契约/数据/权限/部署变更、向后兼容、恢复方法。
 
 ## Review checklist
+
 - [ ] 满足任务验收，无无关修改
 - [ ] 检查通过；草稿/权限/错误路径已验证
 - [ ] 配置、文档和任务日志同步
@@ -97,15 +101,15 @@ Codex 自审与 AI review 是辅助证据，不替代人类批准。若同一 Gi
 
 P0 实现根 package scripts：
 
-| 命令契约 | 行为 |
-| --- | --- |
-| pnpm format:check | 所有适用文件 Prettier 检查 |
-| pnpm lint | TS/JS ESLint，--max-warnings=0 |
-| pnpm typecheck | 所有 TS 包项目级类型检查 |
-| pnpm test | 确定性单元/契约测试，非 watch |
-| pnpm test:e2e | 构建后的关键路径 Playwright |
-| pnpm build | 构建当前已实现应用 |
-| pnpm check | 按顺序聚合当前阶段必须通过的本地检查 |
+| 命令契约             | 行为                                         |
+| -------------------- | -------------------------------------------- |
+| pnpm format:check    | 所有适用文件 Prettier 检查                   |
+| pnpm lint            | TS/JS ESLint，--max-warnings=0               |
+| pnpm typecheck       | 所有 TS 包项目级类型检查                     |
+| pnpm test            | 确定性单元/契约测试，非 watch                |
+| pnpm test:e2e        | 构建后的关键路径 Playwright                  |
+| pnpm build           | 构建当前已实现应用                           |
+| pnpm check           | 按顺序聚合当前阶段必须通过的本地检查         |
 | pnpm contracts:check | schema/client 再生成与漂移检测，接口阶段引入 |
 
 Python 阶段增加 uv run ruff check、uv run ruff format --check、uv run mypy、uv run pytest。脚本在 services/ai-api 的项目上下文中运行，不假设调用者 cwd；没有 Python 服务前不创建假成功的 Python 检查。
