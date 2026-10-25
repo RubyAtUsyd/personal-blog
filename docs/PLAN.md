@@ -144,8 +144,8 @@
 
 ## 当前决策与阻塞
 
-- 2026-10-25：P0 本地工程底座已实现；文章/课程/关于我正文和检索服务属于后续阶段。
-- GitHub 远端由用户指定为 `https://github.com/RubyAtUsyd/personal-blog.git`。P0 开发分支通过草稿 PR #1 供 Ruby 审核；未合并，也未部署。
+- 2026-10-25：P0 工程底座已合并；文章/课程/关于我正文和检索服务属于后续阶段。
+- GitHub 远端由用户指定为 `https://github.com/RubyAtUsyd/personal-blog.git`。P0 PR #1 已由 Ruby 合并。Ruby 选择保留仓库名并使用项目 Pages 地址 `https://RubyAtUsyd.github.io/personal-blog/`。
 - AWS/Atlas/模型账户和费用授权未确定：不阻塞本地与替身测试，阻塞真实集成及生产发布。
 - OIDC/模型/embedding 供应商待相应阶段验证与记录，不能由示例密钥或开发身份冒充生产完成。
 
@@ -156,3 +156,5 @@
 2026-10-25 / P0-02 / DONE（本地）：Husky + lint-staged + commitlint + ESLint/Prettier + 严格 TS 类型检查已接入。`pnpm check` 通过：7 项单元测试、hooks 独立仓库场景（首次提交、自动格式化、错误 lint、错误提交信息、有效提交、部分暂存、含空格路径、删除文件）、秘密扫描、构建、6 项桌面/手机端浏览器测试（包括 320px、404、键盘、自动可访问性）。`pnpm audit:deps` 返回无已知漏洞。自动可访问性测试仅覆盖当前首页，不代表整个未来网站已完全符合 WCAG。ESLint 9 的兼容取舍和复核期限见 ADR。
 
 2026-10-25 / P0-03 / DONE：PR 模板、只读质量 workflow、`quality-gate` 聚合和 Dependabot 配置在开发分支。本地 `quality-gate` 7 项状态判断测试通过。GitHub 草稿 PR #1 的 `checks`、`security`、`quality-gate` 均完成且成功。main 分支保护通过 API 核实：必须经 PR、需要 `quality-gate`、0 位独立审批（单人模式）、评论已解决、管理员也受保护、线性历史、禁止强推/删除。隔离测试 PR #2 故意令 `checks` 失败；其 `quality-gate` 同样失败，GitHub 的 `mergeable_state=blocked`；该 PR 随后已关闭，未合并。正式 PR #1 等待 Ruby 审核，尚未发布。
+
+2026-10-26 / P1-04 部分交付（Pages 发布底座）/ IN_PROGRESS：Ruby 授权首次部署并选择项目 Pages 地址。已建立独立 `Deploy GitHub Pages` workflow、静态子路径构建和部署恢复手册；GitHub Pages API 返回 201，发布源为 Actions，HTTPS 已开启。本地 Node 24.19.0 的 `pnpm check` 通过（7 项单元、hooks 场景、6 项浏览器测试）；`GITHUB_PAGES_BASE_PATH=/personal-blog pnpm build` 通过。以 `/personal-blog/` 挂载的本地浏览器验证首页、样式和脚本加载正常，资源请求无 4xx/5xx。P1-04 的文章深链、sitemap/RSS、图片适配仍待 P1-01 至 P1-03 后完成。本条在远端 CI、发布和线上访问验证后补充最终结果。
