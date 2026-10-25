@@ -53,19 +53,19 @@
 
 ## 3. 技术与部署决策
 
-| 层 | 决策 |
-| --- | --- |
-| Web | Next.js 16 系列稳定补丁、兼容 React、TypeScript strict |
-| UI | Tailwind CSS 4、shadcn/ui，统一设计 token |
-| 正文 | Markdown、remark/rehype、Shiki；禁用任意 HTML/JS 执行 |
-| 内容 API | NestJS + Fastify，Mongoose，OpenAPI |
-| AI API | Python + FastAPI + Pydantic，官方模型 SDK，模型供应商 adapter |
-| 内容数据库 | MongoDB Atlas；本地开发允许容器 MongoDB |
-| 检索 | 优先验证 Atlas Vector Search，并比较词法与混合检索；不可假设普通 MongoDB 容器具备 Atlas 搜索能力 |
-| 媒体 | AWS S3 + CloudFront OAC；SDK v3；图片处理用有资源限制的任务 |
-| 包管理 | pnpm workspace、uv；提交各自 lockfile |
-| 检查 | ESLint、Prettier、Ruff、mypy、Vitest、pytest、Playwright |
-| 部署 | Web 静态导出至 GitHub Pages；API 使用容器部署，AWS 计算服务待预算/网络验证 |
+| 层         | 决策                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------ |
+| Web        | Next.js 16 系列稳定补丁、兼容 React、TypeScript strict                                           |
+| UI         | Tailwind CSS 4、shadcn/ui，统一设计 token                                                        |
+| 正文       | Markdown、remark/rehype、Shiki；禁用任意 HTML/JS 执行                                            |
+| 内容 API   | NestJS + Fastify，Mongoose，OpenAPI                                                              |
+| AI API     | Python + FastAPI + Pydantic，官方模型 SDK，模型供应商 adapter                                    |
+| 内容数据库 | MongoDB Atlas；本地开发允许容器 MongoDB                                                          |
+| 检索       | 优先验证 Atlas Vector Search，并比较词法与混合检索；不可假设普通 MongoDB 容器具备 Atlas 搜索能力 |
+| 媒体       | AWS S3 + CloudFront OAC；SDK v3；图片处理用有资源限制的任务                                      |
+| 包管理     | pnpm workspace、uv；提交各自 lockfile                                                            |
+| 检查       | ESLint、Prettier、Ruff、mypy、Vitest、pytest、Playwright                                         |
+| 部署       | Web 静态导出至 GitHub Pages；API 使用容器部署，AWS 计算服务待预算/网络验证                       |
 
 P0 核对兼容性与安全补丁，记录 Node LTS、Python 和依赖版本。不要写“latest”作为可复现版本，不为追版本使用 beta/canary。新增服务在对应阶段才搭建，不一次安装所有未来依赖。
 

@@ -12,19 +12,19 @@
 
 ## P0：工程底座与门禁
 
-### P0-01 仓库与版本基线 — TODO
+### P0-01 仓库与版本基线 — DONE（本地）
 
 依赖：无。
 行动：确认目标目录与现有 Git；独立初始化或使用用户指定仓库；设定 pnpm workspace、Node LTS、Python/uv 版本约定；选择兼容稳定版本并记录 ADR；创建最小可运行 web 页面。
 验收：新 checkout 可按 README 安装与启动；lockfile 完整；没有纳入父目录项目；明确版本和命令。
 
-### P0-02 格式、lint、类型与 hooks — TODO
+### P0-02 格式、lint、类型与 hooks — DONE（本地）
 
 依赖：P0-01。
 行动：ESLint flat config、Prettier、TS strict、Husky、lint-staged、commitlint、统一脚本；只配置当前实际存在的应用。
 验收：工程文档第 6 节的合法/非法提交、部分暂存与含空格路径测试全部通过；临时仓库验证不破坏工作区；规则失败能阻止提交。
 
-### P0-03 PR 与 CI 门禁 — TODO
+### P0-03 PR 与 CI 门禁 — IN_PROGRESS（远程验证待完成）
 
 依赖：P0-02。
 行动：PR 模板、质量 workflow、quality-gate；明确单人审核模式；远程具备条件时配置并验证 main 保护。
@@ -144,7 +144,15 @@
 
 ## 当前决策与阻塞
 
-- 2026-10-24：文档已准备；应用实现尚未开始。
-- GitHub 用户名与仓库未确定：不阻塞本地 P0/P1，阻塞远程保护与正式 Pages URL 验证。
+- 2026-10-25：P0 本地工程底座已实现；文章/课程/关于我正文和检索服务属于后续阶段。
+- GitHub 远端由用户指定为 `https://github.com/RubyAtUsyd/personal-blog.git`；P0-03 需核对远端 CI、PR 和 main 分支保护实际状态。
 - AWS/Atlas/模型账户和费用授权未确定：不阻塞本地与替身测试，阻塞真实集成及生产发布。
 - OIDC/模型/embedding 供应商待相应阶段验证与记录，不能由示例密钥或开发身份冒充生产完成。
+
+## P0 验收日志
+
+2026-10-25 / P0-01 / DONE（本地）：独立初始化 `personal-blog` 仓库，`main` 仅含最初开发文档；从 `feat/P0-engineering-foundation` 开发静态首页。Node 24.19.0、pnpm 11.19.0、Next.js 16.4.3、React 19.3.1 固定在配置/锁文件，具体取舍见 `docs/adr/0001-foundation.md`。干净临时仓库中的 `pnpm install --frozen-lockfile --offline`、`pnpm typecheck`、`pnpm build` 均通过；临时仓库已清理。构建生成 `/` 与 `/_not-found` 静态页面。未上线。
+
+2026-10-25 / P0-02 / DONE（本地）：Husky + lint-staged + commitlint + ESLint/Prettier + 严格 TS 类型检查已接入。`pnpm check` 通过：7 项单元测试、hooks 独立仓库场景（首次提交、自动格式化、错误 lint、错误提交信息、有效提交、部分暂存、含空格路径、删除文件）、秘密扫描、构建、6 项桌面/手机端浏览器测试（包括 320px、404、键盘、自动可访问性）。`pnpm audit:deps` 返回无已知漏洞。自动可访问性测试仅覆盖当前首页，不代表整个未来网站已完全符合 WCAG。ESLint 9 的兼容取舍和复核期限见 ADR。
+
+2026-10-25 / P0-03 / IN_PROGRESS：PR 模板、只读质量 workflow、`quality-gate` 聚合和 Dependabot 配置在开发分支。本地 `quality-gate` 7 项状态判断测试通过。远端 PR、required check、分支保护及故意失败的隔离 PR 仍需在 GitHub 验证；未取得远端证据前不标记 DONE。
