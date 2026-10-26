@@ -7,7 +7,7 @@ test('static homepage is readable, navigable and accessible', async ({
   await page.goto('/');
   await expect(page).toHaveTitle(/Ruby Liang/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
-    'Building things.',
+    "Hey, I'm Ruby.",
   );
   await page.keyboard.press('Tab');
   await expect(
@@ -16,13 +16,24 @@ test('static homepage is readable, navigable and accessible', async ({
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#main$/);
   await page.getByRole('link', { name: 'Explore the notebook' }).click();
-  await expect(page).toHaveURL(/#notebook$/);
+  await expect(page).toHaveURL(/#writing$/);
   await expect(
-    page.getByRole('heading', { name: 'Inside the notebook' }),
+    page.getByRole('heading', { name: 'Writing from the work.' }),
+  ).toBeVisible();
+  await expect(
+    page.getByText('The first article is on its way.'),
+  ).toBeVisible();
+  await page
+    .getByRole('navigation', { name: 'Primary navigation' })
+    .getByRole('link', { name: 'Notes' })
+    .click();
+  await expect(page).toHaveURL(/#notes$/);
+  await expect(
+    page.getByRole('heading', { name: 'Learning, connected.' }),
   ).toBeVisible();
   await page.reload();
   await expect(
-    page.getByRole('heading', { name: 'Course notes' }),
+    page.getByRole('heading', { name: 'Learning, connected.' }),
   ).toBeVisible();
   expect(
     await page.evaluate(
