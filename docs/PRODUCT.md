@@ -1,4 +1,6 @@
-# 产品需求与架构
+# 产品详细规范与架构约束
+
+本文件保留数据模型、API、内容安全和检索问答的详细验收约束。便于快速交接的产品目标、阶段范围和**当前真实状态**请先读 [PRD.md](PRD.md)；实施任务和实际完成证据见 [PLAN.md](PLAN.md)。以下条目是目标设计，除非在开发记录中有验收证据，否则不能视为已实现。
 
 ## 1. 目标与范围
 
@@ -146,4 +148,4 @@ Mock 至少含 8 篇完整样例：4 篇博客、两个系列各两章，另含�
 ## 9. 非目标与后续决策
 
 暂不引入 Kubernetes、Kafka、Redis、GraphQL、多 Agent、微调或训练模型。只有已观察到的需求才通过 ADR 引入。
-待定：GitHub 账号/仓库、云预算/region、管理员 OIDC、模型与 embedding 供应商、Atlas Search 配额、云网络访问方案。P0/P1 不依赖它们；相关阶段必须明确决定后才创建付费资源。
+已确定 GitHub 仓库 `RubyAtUsyd/personal-blog` 与 Pages 项目站点地址。仍待决定：云预算/region、管理员 OIDC、模型与 embedding 供应商、Atlas Search 配额、云网络访问方案。P1 本地 mock 工作不依赖它们；相关阶段必须明确决定后才创建付费资源。

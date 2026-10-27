@@ -28,16 +28,16 @@ pnpm dev
 - hooks 检验脚本只在独立临时仓库创建错误提交；不会往项目历史加入测试错误。
 - 秘密扫描针对当前工作树，不是历史清理工具。若发现曾提交秘密，立即撤销凭证并按事故流程处理。
 
-## GitHub（P0 已接入）
+## GitHub 审核与 CI（截至 2026-10-27）
 
-1. 远端为 `RubyAtUsyd/personal-blog`，公开仓库。文档 main 和 P0 分支已推送，正式 [草稿 PR #1](https://github.com/RubyAtUsyd/personal-blog/pull/1) 待审核。
-2. Quality workflow 的 `checks`、`security`、`quality-gate` 在 PR #1 首次运行全部成功。分支保护通过 GitHub API 读取并确认：必须经 PR、required `quality-gate`、对话解决、线性历史、管理员适用、禁止强推/删除。
+1. 远端为公开仓库 `RubyAtUsyd/personal-blog`。[P0 PR #1](https://github.com/RubyAtUsyd/personal-blog/pull/1) 已合并；最新蓝色首页来自 [PR #10](https://github.com/RubyAtUsyd/personal-blog/pull/10)。交付时间线与运行证据见 [开发记录](../DEVELOPMENT_HISTORY.md)。
+2. Quality workflow 的 `checks`、`security`、`quality-gate` 在 PR 与 main 运行。分支保护经 GitHub API 核实：必须经 PR、required `quality-gate`、对话解决、线性历史、管理员适用、禁止强推/删除。
 3. 个人仓库 required approval 为 0；同一账号不能批准自己的 PR。Ruby 在 PR 查看 diff 后手动决定是否合并；有第二位维护者再启用 required approval。
 4. 隔离 [测试 PR #2](https://github.com/RubyAtUsyd/personal-blog/pull/2) 故意让 `checks` 失败；`quality-gate` 失败且 `mergeable_state=blocked`。该 PR 已关闭，未合并。
 5. Workflow 不设置顶层路径过滤，仅文档变更也会运行。`quality-gate` 的失败/取消/跳过组合在本地单元测试覆盖；远端失败路径由 PR #2 验证。
 
-PR workflow 没有云密钥、写入权限或部署步骤；只读内容权限，不使用 pull_request_target 执行 PR 代码。尚无独立第二位维护者，因此不配置 CODEOWNERS 或 required approval。
+PR workflow 没有云密钥、写入权限或部署步骤；只读内容权限，不使用 pull_request_target 执行 PR 代码。只有成功的 main Quality 才触发独立 Pages 发布，具体见 [Pages 运行手册](github-pages.md)。尚无独立第二位维护者，因此不配置 CODEOWNERS 或 required approval。
 
 ## 恢复与审核范围
 
-P0 不涉及数据库迁移或线上状态。保持当前 main 的文档提交；工程变更在独立分支审核。停止本地服务器可结束对应终端进程，生成的 .next/out 可以重新生成。正式 PR 未经审核前不合并或发布。
+当前没有数据库迁移，但静态首页已上线。工程变更在独立分支审核；静态站点的回退见 [Pages 运行手册](github-pages.md)。停止本地服务器可结束对应终端进程，生成的 `.next`/`out` 可以重新生成。新 PR 未经审核与授权前不合并或发布。

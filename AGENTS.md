@@ -2,7 +2,7 @@
 
 ## Mission and scope
 
-Build Ruby's technical blog, course notes, About page and grounded article Q&A. Read `docs/PRODUCT.md`, `docs/ENGINEERING.md`, and the relevant task in `docs/PLAN.md` before implementation. User instructions take precedence over these project defaults.
+Build Ruby's technical blog, course notes, About page and grounded article Q&A. Read `docs/PRD.md` for product scope and current status, `docs/DEVELOPMENT_HISTORY.md` for delivered evidence, `docs/PRODUCT.md` for detailed requirements, `docs/ENGINEERING.md` for implementation rules, and the relevant task in `docs/PLAN.md` before implementation. User instructions take precedence over these project defaults.
 
 This file applies to the future repository containing this document. Do not modify unrelated sibling projects or automatically import private notes, resumes or employer source code.
 

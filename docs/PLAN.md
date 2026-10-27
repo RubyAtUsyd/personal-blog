@@ -1,6 +1,6 @@
 # 分阶段执行计划与证据记录
 
-初始状态：所有任务 TODO。本文档存在不代表配置已生效。每个任务用 TODO / IN_PROGRESS / BLOCKED / DONE；DONE 必须有验收证据。任务内独立部分可继续推进，但不得绕过依赖、权限或生产发布要求。
+本文档记录任务依赖与验收证据。每个任务用 TODO / IN_PROGRESS / BLOCKED / DONE；DONE 必须有验收证据。任务内独立部分可继续推进，但不得绕过依赖、权限或生产发布要求。当前产品状态概览见 `docs/PRD.md`，历史时间线见 `docs/DEVELOPMENT_HISTORY.md`。
 
 ## 执行约定
 
@@ -52,12 +52,12 @@
 行动：系列目录与前后篇、构建搜索索引、中英文匹配与过滤 URL。
 验收：第一/末章和草稿跳过正确；搜索技术词可找到对应文章；重复中文标题锚点一致；无结果体验清楚。
 
-### P1-04 静态构建与首次发布准备 — TODO
+### P1-04 静态构建与首次发布准备 — IN_PROGRESS（Pages 发布底座已完成）
 
 依赖：P1-03。
 行动：静态路由枚举、sitemap/RSS/metadata、图片适配、404、Pages workflow、Playwright 静态产物测试。
 验收：本地构建可深链刷新；站点 URL/basePath 不硬编码未知用户名；无服务端依赖；请求不存在文章显示合理 404；获得部署授权后验证线上路径。
-注意：尚无部署授权或 GitHub 配置时交付 artifact 与清单，不标记线上验收完成。
+注意：Pages 发布底座与静态首页已上线；文章深链、sitemap/RSS 和完整 P1 发布验收仍待内容任务完成。不要把首页发布误记为整个 P1-04 已完成。
 
 ## P2：真实内容与媒体
 
@@ -116,7 +116,7 @@
 
 依赖：P3-03、P3-04。
 行动：至少 40 题与证据标注、保留测试集、检索基线对比、支持度人工抽样、成本/延迟统计、失败分析。
-验收：达到 PRODUCT 第 7 节门槛；记录真实模型与索引版本；确定预算和延迟 SLO；通过后 Ruby 决定上线。
+验收：达到 `docs/PRODUCT.md` 第 7 节门槛；记录真实模型与索引版本；确定预算和延迟 SLO；通过后 Ruby 决定上线。
 门槛未达时保留关键词搜索，修复检索/引用问题；不得仅调低阈值或隐藏失败样例。
 
 ## P4：发布与交接
@@ -146,7 +146,7 @@
 
 - 2026-10-25：P0 工程底座已合并；文章/课程/关于我正文和检索服务属于后续阶段。
 - GitHub 远端由用户指定为 `https://github.com/RubyAtUsyd/personal-blog.git`。P0 PR #1 已由 Ruby 合并。Ruby 选择保留仓库名并使用项目 Pages 地址 `https://RubyAtUsyd.github.io/personal-blog/`。
-- AWS/Atlas/模型账户和费用授权未确定：不阻塞本地与替身测试，阻塞真实集成及生产发布。
+- AWS/Atlas/模型账户和费用授权未确定：不阻塞本地与替身测试，阻塞对应云服务真实集成与上线；静态 Pages 首页已上线。
 - OIDC/模型/embedding 供应商待相应阶段验证与记录，不能由示例密钥或开发身份冒充生产完成。
 
 ## P0 验收日志
@@ -159,4 +159,6 @@
 
 2026-10-26 / P1-04 部分交付（Pages 发布底座）/ IN_PROGRESS：Ruby 授权首次部署并选择项目 Pages 地址。PR #8 经远端 `Quality` 成功后合并为 `3754d9e`；main 的 `Quality` run `40210586853` 和 `Deploy GitHub Pages` run `40210690899` 都成功。GitHub Pages API 返回 Actions 发布源、HTTPS 开启，公开首页 `https://rubyatusyd.github.io/personal-blog/` 返回 200，抽查 CSS/JS 均为 200，未知路径返回 404。本地 Node 24.19.0 的 `pnpm check` 通过（7 项单元、hooks 场景、6 项浏览器测试）；`GITHUB_PAGES_BASE_PATH=/personal-blog pnpm build` 通过。以 `/personal-blog/` 挂载的本地浏览器验证首页、样式和脚本加载正常，资源请求无 4xx/5xx。P1-04 的文章深链、sitemap/RSS、图片适配仍待 P1-01 至 P1-03 后完成。
 
-2026-10-27 / P1 首页视觉改造 / IN_PROGRESS：参考 `https://www.xianmin.org/` 的清晰导航、个人介绍和文章导览结构，采用独立的蓝色视觉系统重做静态首页；不使用参考站点的图片、文字或主题代码。新增 Writing、Notes、About 页内导航和明确的未发布内容状态，没有虚构文章或不可达页面链接。`pnpm check` 通过：格式、lint、类型、7 项单元测试、hooks 验证、秘密扫描、静态构建和 6 项桌面/手机浏览器测试（包括 320px、键盘操作和自动可访问性）；浏览器截图已人工检查桌面和手机布局。仍待 PR 远端 CI 和 Ruby 审核；独立文章、笔记及 About 路由属于后续任务。
+2026-10-27 / P1 首页视觉改造 / DONE（首页）：参考 `https://www.xianmin.org/` 的清晰导航、个人介绍和文章导览结构，采用独立的蓝色视觉系统重做静态首页；不使用参考站点的图片、文字或主题代码。新增 Writing、Notes、About 页内导航和明确的未发布内容状态，没有虚构文章或不可达页面链接。`pnpm check` 通过：格式、lint、类型、7 项单元测试、hooks 验证、秘密扫描、静态构建和 6 项桌面/手机浏览器测试（包括 320px、键盘操作和自动可访问性）；浏览器截图已人工检查桌面和手机布局。PR #10 经 Ruby 合并为 `d192c54`；main Quality run `40358972156` 与 Pages run `40359200794` 都成功。线上首页、新版文案与抽查的 CSS/JS 资源返回 200。独立文章、笔记及 About 路由属于后续任务，不能把本首页改造算作 P1-02 完成。
+
+2026-10-27 / DOC-01 开发记录与 Claude Code 交接 / DONE（本地）：新增 `docs/PRD.md`、`docs/DEVELOPMENT_HISTORY.md`、根目录 `CLAUDE.md`；更新 README、详细规范与运行手册，将蓝色首页上线后的实际状态和下一项 P1-01 对齐。`pnpm format:check`、`pnpm secrets:check`、`git diff --check` 均通过；11 个 Markdown 文件的本地链接检查无断链。文档改动不代表任何新的产品功能已完成；远端 PR/CI 结果另行核实。
